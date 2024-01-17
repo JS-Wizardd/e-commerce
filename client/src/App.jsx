@@ -29,7 +29,7 @@ import ResetPassword from './pages/ResetPassword.jsx'
 import AccountPage from './pages/AccountPage.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
-axios.defaults.baseURL = 'http://localhost:4000/api/v1'
+axios.defaults.baseURL = import.meta.env.VITE_API_URL
 axios.defaults.withCredentials = true
 
 const App = () => {
