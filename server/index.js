@@ -14,12 +14,21 @@ import { addressRouter } from './Routes/addressRoutes.js'
 import './Utils/node-crone.js'
 import { ordersRouter } from './Routes/ordersRoutes.js'
 import connectDb from './Config/dbConnection.js'
+// dirname
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+import path from 'path'
 
 connectDb()
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const port = process.env.PORT || 4000
 
 const app = express()
+
+app.use(express.static(path.join(__dirname, '../client/dist')))
 
 app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups')
@@ -49,6 +58,10 @@ app.use('/api/v1/orders', ordersRouter)
 //error handling middlewares
 app.use(notFound)
 app.use(errorHandler)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'))
+})
 
 app.listen(port, () => {
   console.log(`Server is listening to port ${port}`)
