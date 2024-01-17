@@ -28,7 +28,17 @@ const port = process.env.PORT || 4000
 
 const app = express()
 
-app.use(express.static(path.join(__dirname, '../client/dist')))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/dist')))
+  app.get('*', (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, '../client/dist', 'index.html'),
+      function (err) {
+        if (err) res.status(500).send(err)
+      }
+    )
+  })
+}
 
 app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups')
@@ -58,10 +68,6 @@ app.use('/api/v1/orders', ordersRouter)
 //error handling middlewares
 app.use(notFound)
 app.use(errorHandler)
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'))
-})
 
 app.listen(port, () => {
   console.log(`Server is listening to port ${port}`)
