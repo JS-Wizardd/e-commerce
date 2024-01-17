@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 app.use(
   cors({
     credentials: true,
-    origin: '*',
+    origin: ['https://ecommerce-mern-neon.vercel.app/'],
   })
 )
 
