@@ -1,0 +1,62 @@
+label {
+  @apply text-sm font-semibold leading-none mb-[2px];
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+input[type='tel'],
+textarea,
+option,
+select {
+  @apply w-full border  outline-gray-500 border-gray-500 my-1 py-[8px] px-3 rounded  bg-white text-sm text-black font-semibold focus:outline focus:outline-purple-800 outline-2 focus:bg-slate-50 placeholder:text-gray-400;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-size: 0.8rem; /* 14px */
+  opacity: 0.8;
+  /* Firefox */
+}
+
+span {
+  display: none;
+}
+
+input:invalid[focused='true'] {
+  border: 1px solid red;
+}
+
+input:invalid[focused='true'] ~ span {
+  display: block;
+}
+
+/* Custom CSS class for select dropdown options */
+.custom-dropdown-option {
+  font-weight: 600; /* Equivalent to font-semibold */
+  color: #718096; /* Equivalent to text-gray-400 in Tailwind */
+  font-size: 1.25rem; /* Equivalent to text-md in Tailwind */
+}
+
+/* Style the select element to handle the default state */
+.custom-select {
+  /* Style the default option */
+  color: #718096; /* Equivalent to text-gray-400 in Tailwind */
+  font-weight: 600; /* Equivalent to font-semibold */
+  font-size: 1.25rem; /* Equivalent to text-md in Tailwind */
+}
+
+/* Style the selected option */
+.custom-select option:checked {
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+.search__div {
+  background: red;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 100%;
+}
