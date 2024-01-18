@@ -1,28 +1,11 @@
 {
-  "version": 2,
-  "name": "e-commerce",
-  "builds": [
-    { "src": "/client/package.json", "use": "@vercel/node" },
-    { "src": "/server/package.json", "use": "@vercel/node" }
-  ],
-  "routes": [
+  "buildCommand": "cd client && npm install && npm run build",
+  "outputDirectory": "client/dist",
+  "framework": "vite",
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/server/index.js",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "https://ecommerce-mern-neon.vercel.app/",
-        "Access-Control-Allow-Credentials": "true"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/client/dist/$1",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "https://ecommerce-mern-neon.vercel.app/",
-        "Access-Control-Allow-Credentials": "true"
-      }
+      "source": "/server/(.*)",
+      "destination": "/server/index.js"
     }
   ]
 }
